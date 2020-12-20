@@ -14,8 +14,6 @@ public class Control : MonoBehaviour
     [SerializeField] private float jspeed = 40;
     
 
-    public int dimas = 0;
-
     private void Start() 
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,10 +31,9 @@ public class Control : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Collectable")
+        if(collision.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
-            dimas += 1;
+            Destroy(collision.gameObject); //mudar isso para matar o player
         }
     }
     private void Movement()
@@ -88,5 +85,5 @@ public class Control : MonoBehaviour
         {
             state = State.idle;
         }
-    }
+    } //falta fazer a animação de grudar na wall
 }
