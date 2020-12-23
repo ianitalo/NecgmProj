@@ -12,7 +12,9 @@ public class Control : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jspeed = 40;
-    
+    [SerializeField] private Transform camera;
+    [SerializeField] private Transform respawn1;
+    [SerializeField] private Transform respawn2;
 
     private void Start() 
     {
@@ -29,11 +31,19 @@ public class Control : MonoBehaviour
         anim.SetInteger("state", (int)state);
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if(collision.tag == "Enemy")
+        if(other.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject); //mudar isso para matar o player
+            rb.transform.position = respawn1.transform.position;                      
+        }
+
+        if (other.gameObject.tag == "Goal1")
+        {
+            rb.transform.position = respawn2.transform.position;           
+            respawn1.transform.position = respawn2.transform.position;
+            camera.transform.position = new Vector3(50f, 1.05f,-10);
+
         }
     }
     private void Movement()
