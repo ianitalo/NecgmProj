@@ -7,6 +7,9 @@ TagManager:
   - Collectable
   - Enemy
   - Goal1
+  - Goal2
+  - Goal3
+  - Goal4
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,8 @@ public class Control : MonoBehaviour
     [SerializeField] private Transform camera;
     [SerializeField] private Transform respawn1;
     [SerializeField] private Transform respawn2;
+    [SerializeField] private Transform respawn3;
+    [SerializeField] private Transform respawn4;
 
     private void Start() 
     {
@@ -42,10 +44,24 @@ public class Control : MonoBehaviour
         {
             rb.transform.position = respawn2.transform.position;           
             respawn1.transform.position = respawn2.transform.position;
-            camera.transform.position = new Vector3(50f, 1.05f,-10);
-
+            camera.transform.position = new Vector3(30f, 1.05f,-10);
         }
-    }
+
+        if (other.gameObject.tag == "Goal2")
+        {
+            rb.transform.position = respawn3.transform.position;
+            respawn1.transform.position = respawn3.transform.position;
+            camera.transform.position = new Vector3(60f, 1.05f, -10);
+        }
+
+        if (other.gameObject.tag == "Goal3")
+        {
+            rb.transform.position = respawn4.transform.position;
+            respawn1.transform.position = respawn4.transform.position;
+            camera.transform.position = new Vector3(90f, 1.05f, -10);
+        }
+    }   
+
     private void Movement()
     {
         float hDirection = Input.GetAxis("Horizontal");
