@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Control : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Control : MonoBehaviour
     [SerializeField] private Transform respawn2;
     [SerializeField] private Transform respawn3;
     [SerializeField] private Transform respawn4;
+    [SerializeField] private int Deaths = 0;
+    [SerializeField] private Text DeathCount;
 
     private void Start() 
     {
@@ -37,7 +40,9 @@ public class Control : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            rb.transform.position = respawn1.transform.position;                      
+            rb.transform.position = respawn1.transform.position;
+            Deaths += 1;
+            DeathCount.text = Deaths.ToString();
         }
 
         if (other.gameObject.tag == "Goal1")
@@ -86,7 +91,7 @@ public class Control : MonoBehaviour
     }
     private void VelocityState()
     {
-        if (state == State.jump)
+        if (state == State.jump | !(coll.IsTouchingLayers(ground)))
         {
             if(rb.velocity.y < 0.1)
             {
