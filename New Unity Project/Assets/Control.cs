@@ -66,11 +66,12 @@ public class Control : MonoBehaviour
             rb.transform.position = respawn4.transform.position;
             respawn1.transform.position = respawn4.transform.position;
             camera.transform.position = new Vector3(90f, 1.05f, -10);
+            DeathCount.fontSize = 140;
         }
 
         if (other.gameObject.tag == "Goal4")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);                                   
         }
     }
 
@@ -91,6 +92,7 @@ public class Control : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(ground))
         {
+            rb.gravityScale = 1;
             rb.velocity = new Vector2(rb.velocity.x, jspeed);
             state = State.jump;
         }
@@ -98,11 +100,15 @@ public class Control : MonoBehaviour
     }
     private void VelocityState()
     {
+        
+
         if (state == State.jump | !(coll.IsTouchingLayers(ground)))
         {
             if (rb.velocity.y < 0.1)
-            {
+            {                              
                 state = State.falling;
+                rb.gravityScale = 9.81f;
+                
             }
         }
         else if (state == State.falling)
